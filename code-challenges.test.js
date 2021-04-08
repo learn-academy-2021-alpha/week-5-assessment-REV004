@@ -22,35 +22,37 @@ var secretCodeWord1 = "lackadaisical";
 var secretCodeWord2 = "gobbledygook";
 // Expected output: "g0bbl3dyg00k"
 
-// describe("when function is called", () => {
-// 	it("returns coded message", () => {
-// 		let secretCodeWord1 = "lackadaisical";
-// 		let newWord = codeIt(secretCodeWord1);
-// 		expect(newWord).toEqual("l4ck4d41s1c4l");
-// 	});
-// 	it("returns coded message", () => {
-// 		let secretCodeWord2 = "gobbledygook";
-// 		let newWord2 = codedIt(secretCodeWord2);
-// 		expect(newWord2).toEqual("g0bbl3dyg00k");
-// 	});
-// });
+describe("when function is called", () => {
+	it("returns coded message", () => {
+		let secretCodeWord1 = "lackadaisical";
+		let newWord = codedWord(secretCodeWord1);
+		expect(newWord).toEqual("l4ck4d41s1c4l");
+	});
+	it("returns coded message", () => {
+		let secretCodeWord2 = "gobbledygook";
+		let newWord2 = codedWord(secretCodeWord2);
+		expect(newWord2).toEqual("g0bbl3dyg00k");
+	});
+});
 
 // b) Create the function that makes the test pass.
 
 const codeWord = (string) => {
 	return string
-		.split("")
+		.split("") // ["c","a","k","e"]
 		.map((value) => {
 			if (value === "a") {
-				return [4];
+				return 4;
 			} else if (value === "e") {
-				return [3];
+				return 3;
 			} else if (value === "i") {
-				return [1];
+				return 1;
 			} else if (value === "o") {
-				return [0];
+				return 0;
+			} else {
+				return value;
 			}
-		})
+		}) //["c",4,"k",3]
 		.join("");
 };
 //trying to get the code to get me the letters changed into the numbers using conditionals but returns only numbers not the word with the letters replaced
@@ -62,11 +64,11 @@ console.log(codeWord(secretCodeWord2));
 
 var arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
 // Expected output: "Apple" "Banana" "Peach"
-// describe("when contains is called, you should get an array as a return containg all the words that contain the letter a", () => {
-// 	let arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
-// 	let newArray = contains(arrayOfWords);
-// 	expect(newArray).toEqual(["Apple", "Banana", "Peach"]);
-// });
+describe("when contains is called, you should get an array as a return containg all the words that contain the letter a", () => {
+	let arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
+	let newArray = contains(arrayOfWords);
+	expect(newArray).toEqual(["Apple", "Banana", "Peach"]);
+});
 // b) Create the function that makes the test pass.
 const contains = (array) =>
 	// filter through the array and turn the uppercase to lowercase and spit the words that contain the letter a back.
@@ -84,29 +86,65 @@ var hand2 = [5, 5, 3, 3, 4];
 var hand3 = [5, 5, 5, 5, 4];
 // Expected output: false
 
-// describe("When function is called", () => {
-// 	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
-// 		var hand1 = [5, 5, 5, 3, 3];
-// 		// Expected output: true
+describe("When function is called", () => {
+	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
+		var hand1 = [5, 5, 5, 3, 3];
+		// Expected output: true
 
-// 		expect(fullHouse(hand1)).toEqual(true);
-// 	});
-// 	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
-// 		var hand2 = [5, 5, 3, 3, 4];
-// 		// Expected output: false
+		expect(fullHouse(hand1)).toEqual(true);
+	});
+	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
+		var hand2 = [5, 5, 3, 3, 4];
+		// Expected output: false
 
-// 		expect(fullHouse(hand2)).toEqual(false);
-// 	});
-// 	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
-// 		var hand3 = [5, 5, 5, 5, 4];
-// 		// Expected output: false
+		expect(fullHouse(hand2)).toEqual(false);
+	});
+	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
+		var hand3 = [5, 5, 5, 5, 4];
+		// Expected output: false
 
-// 		expect(fullHouse(hand3)).toEqual(false);
-// 	});
-// });
+		expect(fullHouse(hand3)).toEqual(false);
+	});
+});
 
-// b) Create the function that makes the test pass.
+b) Create the function that makes the test pass.
 
-const array = array;
+// const array = array;
 
-//ive found some examples online but i dont wanna copy them I would like to build it from the ground up
+const cards = (array) => {
+	//[5,5,5,3,3]
+	//look at first one and store in an array
+	// [5]
+	// is the next element the same value as its in the array
+	// yes so gets pushed in the same array as the other 5 [5,5]
+	// if its not the same store it in a different array then check the next value until all values in the array have been checked
+	// after it check for this specific value it should look like this [5,5,5]
+	// store the diferrent value and it would look like [3,3]
+	// {5:3,3:2}
+	//{1:2,2:2,3:1} this wouldnt be a full house becuase we only need 2 key value pairs with one having a value of 3 and the other key has to have a value of 2
+	let count = {};
+	array.forEach((value) => {
+		if (count[value] > 0) {
+			count[value] = count[value] + 1;
+		} else {
+			count[value] = 1;
+		}
+	});
+	var numberOfKeys = Object.keys(count).length;
+	console.log(count);
+	//its gonna return an array of the keys [5,3] and the length will tell us how many keys we have.
+	if (numberOfKeys != 2) {
+		return false;
+	}
+	if (
+		(count[Object.keys(count)[0]] === 3 &&
+			count[Object.keys(count)[1]] === 2) ||
+		(count[Object.keys(count)[0]] === 2 && count[Object.keys(count)[1]] === 3)
+	) {
+		return true;
+	}
+};
+
+console.log(cards(hand1));
+
+//javascript how to determine the number of keys in an object.
