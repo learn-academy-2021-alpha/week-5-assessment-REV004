@@ -25,12 +25,12 @@ var secretCodeWord2 = "gobbledygook";
 describe("when function is called", () => {
 	it("returns coded message", () => {
 		let secretCodeWord1 = "lackadaisical";
-		let newWord = codedWord(secretCodeWord1);
+		let newWord = codeWord(secretCodeWord1);
 		expect(newWord).toEqual("l4ck4d41s1c4l");
 	});
 	it("returns coded message", () => {
 		let secretCodeWord2 = "gobbledygook";
-		let newWord2 = codedWord(secretCodeWord2);
+		let newWord2 = codeWord(secretCodeWord2);
 		expect(newWord2).toEqual("g0bbl3dyg00k");
 	});
 });
@@ -61,20 +61,22 @@ console.log(codeWord(secretCodeWord2));
 // --------------------2) Create a function that takes in an array and returns all the words that contain the letter a.
 
 // a) Create a test with an expect statement using the variable provided.
+const containsA = (array) => {
+	return array.filter((value) => value.toLowerCase().includes("a"));
+};
+// filter through the array and turn the uppercase to lowercase and spit the words that contain the letter a back.
 
-var arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
+// console.log(containsA(arrayOfWords));
+// var arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
 // Expected output: "Apple" "Banana" "Peach"
 describe("when contains is called, you should get an array as a return containg all the words that contain the letter a", () => {
-	let arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
-	let newArray = contains(arrayOfWords);
-	expect(newArray).toEqual(["Apple", "Banana", "Peach"]);
+	it("return array with letter A", () => {
+		let arrayOfWords = ["Apple", "Banana", "Plum", "Cherry", "Kiwi", "Peach"];
+		let newArray = containsA(arrayOfWords);
+		expect(newArray).toEqual(["Apple", "Banana", "Peach"]);
+	});
 });
 // b) Create the function that makes the test pass.
-const contains = (array) =>
-	// filter through the array and turn the uppercase to lowercase and spit the words that contain the letter a back.
-	array.filter((value) => value.toLowerCase().includes("a"));
-
-console.log(contains(arrayOfWords));
 // --------------------3) Create a function that takes in an array of 5 numbers and determines whether or not the array is a “full house”. A full house is exactly one pair and one three of a kind.
 
 // a) Create a test with an expect statement using the variable provided.
@@ -91,23 +93,22 @@ describe("When function is called", () => {
 		var hand1 = [5, 5, 5, 3, 3];
 		// Expected output: true
 
-		expect(fullHouse(hand1)).toEqual(true);
+		expect(cards(hand1)).toEqual(true);
 	});
 	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
 		var hand2 = [5, 5, 3, 3, 4];
 		// Expected output: false
 
-		expect(fullHouse(hand2)).toEqual(false);
+		expect(cards(hand2)).toEqual(false);
 	});
 	it("takes in an array of 5 numbers and determines whether or not the array is a “full house”.", () => {
 		var hand3 = [5, 5, 5, 5, 4];
 		// Expected output: false
 
-		expect(fullHouse(hand3)).toEqual(false);
+		expect(cards(hand3)).toEqual(false);
 	});
 });
-
-b) Create the function that makes the test pass.
+// b) Create the function that makes the test pass.
 
 // const array = array;
 
@@ -142,6 +143,8 @@ const cards = (array) => {
 		(count[Object.keys(count)[0]] === 2 && count[Object.keys(count)[1]] === 3)
 	) {
 		return true;
+	} else {
+		return false;
 	}
 };
 
